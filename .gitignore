@@ -1,0 +1,15 @@
+# Ignore Python virtual environment
+.venv/
+
+# Ignore environment variables
+.env
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# Streamlit cache
+.streamlit/
+
+# VSCode settings (optional)
+.vscode/
