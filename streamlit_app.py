@@ -4,12 +4,19 @@ from datetime import date
 from dotenv import load_dotenv
 from openai import OpenAI
 
-# --- API Setup ---
-load_dotenv()
-API_KEY = os.getenv("OPENAI_API_KEY")
-if not API_KEY:
-    st.error("❗ OPENAI_API_KEY is missing.")
-    st.stop()
+# Try to load from .env (for local use)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except:
+    pass
+
+# Prefer st.secrets (for cloud), fallback to os.getenv (for local)
+API_KEY = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
+
+# Now use the API_KEY variable
+st.write("API key loaded:", API_KEY[:5] + "..." if API_KEY else "❌ Not found")
+
 
 client = OpenAI(api_key=API_KEY)
 
